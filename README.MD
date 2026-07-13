@@ -1,6 +1,6 @@
 # OnexExplorer #
 
-OnexExplorer is an open-source tool for unpacking and repacking .NOS data files from game called NosTale. It can open almost all .NOS files and allows to view the Content, export and replace it and even add own Content to them. Our software works on Qt 5.5+ with OpenGl.
+OnexExplorer is an open-source tool for unpacking and repacking .NOS data files from game called NosTale. It can open almost all .NOS files and allows to view the Content, export and replace it and even add own Content to them. Our software works on Qt 6.11+ with OpenGl.
 
 Client Modding Discord:  [<img src="https://discordapp.com/api/guilds/590958760374042657/widget.png?style=shield">](https://discord.gg/t73Ayca)
 
@@ -25,7 +25,7 @@ Client Modding Discord:  [<img src="https://discordapp.com/api/guilds/5909587603
 - NSpcData (Player-related animation kits)
 - NStgData (3D Models)
 - NStgeData (3D VFX models)
-
+- NSeffData (VFX configs)
 
 **Other files will be added in future updates.**
 
@@ -33,7 +33,6 @@ Client Modding Discord:  [<img src="https://discordapp.com/api/guilds/5909587603
 ## Unsupported archives ##
 
 - NStuData (Map configs)
-- NSeffData (VFX configs)
 - NStsData
 - NStkData
 - NSemData
@@ -53,7 +52,7 @@ Our project is based on **Boost Software License**:
 
 **Download** a **[release](https://github.com/Pumbaa98/OnexExplorer/releases)** or:
 
-1. Compile given sourcecode using Qt 5.5+ and OpenGl (freeglut)
+1. Compile given sourcecode using Qt 6.11+ and OpenGl (freeglut)
 2. Move required Qt DLL's to EXE's location
 3. Run the program
 
