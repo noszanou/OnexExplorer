@@ -1,4 +1,5 @@
 #include "OnexTreeItem.h"
+#include <QRegularExpression>
 
 OnexTreeItem::OnexTreeItem(const QString &name, INosFileOpener *opener, QByteArray content)
         : name(name), opener(opener), content(content) {
@@ -214,13 +215,13 @@ int OnexTreeItem::saveAsFile(const QString &path, QByteArray content) {
 
 bool OnexTreeItem::operator<(const QTreeWidgetItem &other) const {
     int column = treeWidget()->sortColumn();
-    static QRegExp regExp("^(\\d*)_(\\d*)x(\\d*)$");
+    static QRegularExpression regExp("^(\\d*)_(\\d*)x(\\d*)$");
 
     bool t1IsInt;
     bool t2IsInt;
     int t1 = text(column).toInt(&t1IsInt);
     int t2 = other.text(column).toInt(&t2IsInt);
-    if (t1IsInt && t2IsInt || regExp.exactMatch(text(column)))
+    if (t1IsInt && t2IsInt || regExp.match(text(column)).hasMatch())
         return t1 < t2;
     else
         return false;

@@ -4,7 +4,9 @@
 #
 #-------------------------------------------------
 
-QT       += core gui widgets opengl
+QT       += core gui widgets opengl openglwidgets
+
+CONFIG += c++17
 
 TARGET = OnexExplorer
 TEMPLATE = app
@@ -27,6 +29,7 @@ SOURCES += \
     Source/Converters/ImageConverter.cpp \
     Source/Converters/LittleEndianConverter.cpp \
     Source/Converters/NosModelConverter.cpp \
+    Source/Converters/NosVfxConverter.cpp \
     Source/Converters/ObjConverter.cpp \
     Source/Decryptors/NosTextDatFileDecryptor.cpp \
     Source/Decryptors/NosTextOthersFileDecryptor.cpp \
@@ -55,7 +58,8 @@ SOURCES += \
     Source/Ui/TreeItems/OnexNSmpFrame.cpp \
     Source/Ui/TreeItems/OnexNStgData.cpp \
     Source/Ui/TreeItems/OnexNSmnData.cpp \
-    Source/Ui/TreeItems/OnexNSmcData.cpp
+    Source/Ui/TreeItems/OnexNSmcData.cpp \
+    Source/Ui/TreeItems/OnexNSeffData.cpp
 
 
 
@@ -66,6 +70,7 @@ HEADERS  += \
     Source/Converters/LittleEndianConverter.h \
     Source/Converters/IModelConverter.h \
     Source/Converters/NosModelConverter.h \
+    Source/Converters/NosVfxConverter.h \
     Source/Converters/ObjConverter.h \
     Source/Decryptors/NosTextDatFileDecryptor.h \
     Source/Decryptors/NosTextOthersFileDecryptor.h \
@@ -94,7 +99,8 @@ HEADERS  += \
     Source/Ui/TreeItems/OnexNSmpFrame.h \
     Source/Ui/TreeItems/OnexNStgData.h \
     Source/Ui/TreeItems/OnexNSmnData.h \
-    Source/Ui/TreeItems/OnexNSmcData.h
+    Source/Ui/TreeItems/OnexNSmcData.h \
+    Source/Ui/TreeItems/OnexNSeffData.h
 
 FORMS    += \
     Source/mainwindow.ui \
@@ -111,8 +117,5 @@ RESOURCES += \
 RC_ICONS = ./resources/oxe_icon_trans.ico
 
 
-win32: INCLUDEPATH += $$PWD/freeglut/include/GL
-else:unix: /usr/include/GL/
-
-win32: LIBS += -L$$PWD/freeglut/lib -lfreeglut
-else:unix: LIBS += -lglut -lGLU -lGL
+win32: LIBS += -lopengl32 -lglu32
+else:unix: LIBS += -lGLU -lGL

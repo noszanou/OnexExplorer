@@ -2,7 +2,6 @@
 #define SINGLETEXTFILEPREVIEW_H
 
 #include "../TreeItems/OnexTreeText.h"
-#include <QTextCodec>
 #include <QWidget>
 #include <iostream>
 
@@ -14,11 +13,15 @@ Q_OBJECT
 public:
     explicit SingleTextFilePreview(QByteArray &item, const QString &encoding = "Windows-1250", QWidget *parent = nullptr);
     ~SingleTextFilePreview() override;
+signals:
+    void saveRequested(QByteArray data);
 private slots:
     void onReplaced(const QByteArray &text);
+    void onSaveClicked();
 private:
     Ui::SingleTextFilePreview *ui;
-    QTextCodec *codec;
+    QString encoding;
+    bool usesCrLf;
 };
 
 #endif // SINGLETEXTFILEPREVIEW_H

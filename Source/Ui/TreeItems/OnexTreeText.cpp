@@ -5,6 +5,7 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QRegularExpression>
 
 OnexTreeText::OnexTreeText(const QString &name, NosTextOpener *opener, int fileNumber, int isCompressed, QByteArray content)
         : OnexTreeItem(name, opener, content), fileNumber(fileNumber), isCompressed(isCompressed) {
@@ -27,11 +28,12 @@ QWidget *OnexTreeText::getPreview() {
         return nullptr;
     auto *textPreview = new SingleTextFilePreview(content, getEncoding());
     connect(this, SIGNAL(replaceSignal(QByteArray)), textPreview, SLOT(onReplaced(QByteArray)));
+    connect(textPreview, SIGNAL(saveRequested(QByteArray)), this, SLOT(afterReplace(QByteArray)));
     return textPreview;
 }
 
 QString OnexTreeText::getExportExtension() {
-    QStringList split = name.split(".", QString::SplitBehavior::SkipEmptyParts);
+    QStringList split = name.split(".", Qt::SkipEmptyParts);
     if (split.size() > 1)
         return split.at(split.size() - 1);
     return "";
@@ -90,9 +92,8 @@ FileInfo *OnexTreeText::generateInfos() {
 }
 
 QString OnexTreeText::getEncoding() {
-    QRegExp rx = QRegExp("^_code_\\w{2}_\\w*\\.txt$");
-    int match = rx.indexIn(getName());
-    if (match == -1)
+    QRegularExpression rx("^_code_\\w{2}_\\w*\\.txt$");
+    if (!rx.match(getName()).hasMatch())
         return "EUC-KR";
     QString region = getName().mid(6, 2);
     if (region == "de" || region == "pl" || region == "it" || region == "cz")

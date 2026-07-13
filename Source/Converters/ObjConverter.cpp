@@ -17,7 +17,7 @@ Model *ObjConverter::fromObj(const QString &obj) {
     int object = -1;
     QStringList lines = obj.split("\n");
     for (const QString &line : lines) {
-        QStringList parts = line.split(" ", QString::SplitBehavior::SkipEmptyParts);
+        QStringList parts = line.split(" ", Qt::SkipEmptyParts);
         if (!parts.empty()) {
             if (parts[0] == "v") {
                 fileVertices.append(QVector3D(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat()));
@@ -44,7 +44,7 @@ Model *ObjConverter::fromObj(const QString &obj) {
                                  faceThreeInfos[2].toFloat() - 1);
                 faces.append(f);
             } else if (parts[0] == "usemtl") {
-                QStringList texturemtl = parts[1].split("mtl-", QString::SplitBehavior::SkipEmptyParts);
+                QStringList texturemtl = parts[1].split("mtl-", Qt::SkipEmptyParts);
                 textures.append(texturemtl.at(0).toInt());
                 group++;
             } else if (parts[0] == "o") {

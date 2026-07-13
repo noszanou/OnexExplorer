@@ -82,13 +82,13 @@ void SingleModelPreview::paintGL() {
 }
 
 void SingleModelPreview::mousePressEvent(QMouseEvent *event) {
-    mouse.X = event->x();
-    mouse.Y = event->y();
+    mouse.X = (int) event->position().x();
+    mouse.Y = (int) event->position().y();
 }
 
 void SingleModelPreview::mouseMoveEvent(QMouseEvent *event) {
-    int x = event->x();
-    int y = event->y();
+    int x = (int) event->position().x();
+    int y = (int) event->position().y();
     Qt::MouseButtons buttons = event->buttons();
     if (buttons & Qt::LeftButton) {
         if (y < mouse.Y) {
@@ -111,7 +111,7 @@ void SingleModelPreview::mouseMoveEvent(QMouseEvent *event) {
 }
 
 void SingleModelPreview::wheelEvent(QWheelEvent *event) {
-    camera.Z += event->delta() / 120;
+    camera.Z += event->angleDelta().y() / 120;
     repaint();
 }
 

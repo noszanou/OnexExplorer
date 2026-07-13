@@ -43,7 +43,7 @@ void OnexTreeZlibItem::setId(int id, bool update) {
 }
 
 void OnexTreeZlibItem::setCreationDate(const QString &date, bool update) {
-    QStringList parts = date.split("/", QString::SplitBehavior::SkipEmptyParts);
+    QStringList parts = date.split("/", Qt::SkipEmptyParts);
     if (parts.size() != 3)
         this->creationDate = 0;
     else {
