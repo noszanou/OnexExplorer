@@ -1,13 +1,13 @@
-#include "OnexNSeffData.h"
+#include "OnexNStuData.h"
 #include "../Previews/SingleTextFilePreview.h"
 #include <QJsonArray>
 #include <QJsonDocument>
 
-OnexNSeffData::OnexNSeffData(const QString &name, QByteArray content, NosZlibOpener *opener, int id, int creationDate,
-                             bool compressed) : OnexTreeZlibItem(name, opener, content, id, creationDate, compressed) {
+OnexNStuData::OnexNStuData(const QString &name, QByteArray content, NosZlibOpener *opener, int id, int creationDate,
+                           bool compressed) : OnexTreeZlibItem(name, opener, content, id, creationDate, compressed) {
 }
 
-OnexNSeffData::OnexNSeffData(QJsonObject jo, NosZlibOpener *opener, const QString &directory)
+OnexNStuData::OnexNStuData(QJsonObject jo, NosZlibOpener *opener, const QString &directory)
         : OnexTreeZlibItem(jo["ID"].toString(), opener) {
     setId(jo["ID"].toInt(), true);
     setCreationDate(jo["Date"].toString(), true);
@@ -15,11 +15,11 @@ OnexNSeffData::OnexNSeffData(QJsonObject jo, NosZlibOpener *opener, const QStrin
     onReplace(directory + jo["path"].toString());
 }
 
-OnexNSeffData::~OnexNSeffData() = default;
+OnexNStuData::~OnexNStuData() = default;
 
 static const int PREVIEW_LIMIT = 512 * 1024;
 
-QWidget *OnexNSeffData::getPreview() {
+QWidget *OnexNStuData::getPreview() {
     if (!hasParent())
         return nullptr;
     QByteArray json = toJsonText();
@@ -36,15 +36,15 @@ QWidget *OnexNSeffData::getPreview() {
     return textPreview;
 }
 
-QString OnexNSeffData::getExportExtension() {
+QString OnexNStuData::getExportExtension() {
     return ".json";
 }
 
-int OnexNSeffData::saveAsFile(const QString &path, QByteArray content) {
+int OnexNStuData::saveAsFile(const QString &path, QByteArray content) {
     return OnexTreeItem::saveAsFile(path, toJsonText());
 }
 
-int OnexNSeffData::afterReplace(QByteArray content) {
+int OnexNStuData::afterReplace(QByteArray content) {
     QJsonParseError error{};
     QJsonDocument document = QJsonDocument::fromJson(content, &error);
     if (error.error == QJsonParseError::NoError && document.isObject())
@@ -57,22 +57,22 @@ int OnexNSeffData::afterReplace(QByteArray content) {
     return 1;
 }
 
-FileInfo *OnexNSeffData::generateInfos() {
+FileInfo *OnexNStuData::generateInfos() {
     auto *infos = OnexTreeZlibItem::generateInfos();
     if (hasParent())
         infos->addStringLineEdit("Content", getSummary())->setEnabled(false);
     return infos;
 }
 
-QByteArray OnexNSeffData::toJsonText() {
+QByteArray OnexNStuData::toJsonText() {
     return QJsonDocument(converter.toJson(getContent())).toJson();
 }
 
-QString OnexNSeffData::getSummary() {
+QString OnexNStuData::getSummary() {
     QJsonObject jo = converter.toJson(getContent());
-    if (!NosVfxConverter::isVfx(jo))
-        return QString("not a VFX config (%1 raw bytes)").arg(getContentSize());
-    return QString("VFX %1, %2 object(s)")
-            .arg(jo["Header"].toObject()["VfxId"].toInt())
+    if (!NosMapConverter::isMapConfig(jo))
+        return QString("not a map config (%1 raw bytes)").arg(getContentSize());
+    return QString("Map config: %1 model(s), %2 object(s)")
+            .arg(jo["Models"].toArray().size())
             .arg(jo["Objects"].toArray().size());
 }

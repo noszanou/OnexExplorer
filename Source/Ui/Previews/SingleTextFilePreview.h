@@ -13,6 +13,7 @@ Q_OBJECT
 public:
     explicit SingleTextFilePreview(QByteArray &item, const QString &encoding = "Windows-1250", QWidget *parent = nullptr);
     ~SingleTextFilePreview() override;
+    void setSaveEnabled(bool enabled);
 signals:
     void saveRequested(QByteArray data);
 private slots:

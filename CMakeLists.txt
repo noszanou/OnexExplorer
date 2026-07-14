@@ -27,6 +27,7 @@ set(SOURCES
         Source/Converters/LittleEndianConverter.cpp
         Source/Converters/NosModelConverter.cpp
         Source/Converters/NosVfxConverter.cpp
+        Source/Converters/NosMapConverter.cpp
         Source/Converters/ObjConverter.cpp
         Source/Decryptors/NosTextDatFileDecryptor.cpp
         Source/Decryptors/NosTextOthersFileDecryptor.cpp
@@ -57,6 +58,7 @@ set(SOURCES
         Source/Ui/TreeItems/OnexNSmnData.cpp
         Source/Ui/TreeItems/OnexNSmcData.cpp
         Source/Ui/TreeItems/OnexNSeffData.cpp
+        Source/Ui/TreeItems/OnexNStuData.cpp
         )
 
 set(MOC_HEADERS
@@ -67,6 +69,7 @@ set(MOC_HEADERS
         Source/Converters/IModelConverter.h
         Source/Converters/NosModelConverter.h
         Source/Converters/NosVfxConverter.h
+        Source/Converters/NosMapConverter.h
         Source/Converters/ObjConverter.h
         Source/Decryptors/NosTextDatFileDecryptor.h
         Source/Decryptors/NosTextOthersFileDecryptor.h
@@ -97,6 +100,7 @@ set(MOC_HEADERS
         Source/Ui/TreeItems/OnexNSmnData.h
         Source/Ui/TreeItems/OnexNSmcData.h
         Source/Ui/TreeItems/OnexNSeffData.h
+        Source/Ui/TreeItems/OnexNStuData.h
         )
 
 set(UIS

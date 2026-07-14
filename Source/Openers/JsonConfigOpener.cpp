@@ -9,6 +9,7 @@
 #include <Source/Ui/TreeItems/OnexNSmcData.h>
 #include <Source/Ui/TreeItems/OnexNStgData.h>
 #include <Source/Ui/TreeItems/OnexNSeffData.h>
+#include <Source/Ui/TreeItems/OnexNStuData.h>
 
 OnexTreeItem *JsonConfigOpener::load(QFile &file, const QString &directory) {
     QJsonObject jo = QJsonDocument::fromJson(file.readAll()).object();
@@ -81,6 +82,8 @@ OnexTreeItem *JsonConfigOpener::generateRoot(int headerNumber, const QJsonObject
             return new OnexNSmcData(jo["Archive"].toString(), QByteArray::fromHex(jo["Header"].toString().toLocal8Bit()), &zlibOpener);
         case NSeffData:
             return new OnexNSeffData(jo["Archive"].toString(), QByteArray::fromHex(jo["Header"].toString().toLocal8Bit()), &zlibOpener);
+        case NStuData:
+            return new OnexNStuData(jo["Archive"].toString(), QByteArray::fromHex(jo["Header"].toString().toLocal8Bit()), &zlibOpener);
         case 199:
             return new OnexTreeText(jo["Archive"].toString(), &textOpener, jo["Last Edit"].toString());
         default:
@@ -111,6 +114,8 @@ OnexTreeItem *JsonConfigOpener::generateItem(int headerNumber, const QJsonObject
             return new OnexNSmcData(jo, &zlibOpener, directory);
         case NSeffData:
             return new OnexNSeffData(jo, &zlibOpener, directory);
+        case NStuData:
+            return new OnexNStuData(jo, &zlibOpener, directory);
         case 199:
             return new OnexTreeText(jo, &textOpener, directory);
         default:

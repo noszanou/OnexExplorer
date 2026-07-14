@@ -7,6 +7,7 @@
 #include "../Ui/TreeItems/OnexNStgData.h"
 #include "../Ui/TreeItems/OnexNSmcData.h"
 #include "../Ui/TreeItems/OnexNSeffData.h"
+#include "../Ui/TreeItems/OnexNStuData.h"
 
 NosZlibOpener::NosZlibOpener() = default;
 
@@ -119,6 +120,8 @@ OnexTreeItem *NosZlibOpener::createItemFromHeader(QByteArray header, const QStri
             return static_cast<OnexTreeZlibItem *>(new OnexNSmcData(name, array, this, fileId, creationDate, compressed));
         case NSeffData:
             return static_cast<OnexTreeZlibItem *>(new OnexNSeffData(name, array, this, fileId, creationDate, compressed));
+        case NStuData:
+            return static_cast<OnexTreeZlibItem *>(new OnexNStuData(name, array, this, fileId, creationDate, compressed));
         default:
             return new OnexTreeZlibItem(name, this, array, fileId, creationDate, compressed);
     }

@@ -26,13 +26,13 @@ Client Modding Discord:  [<img src="https://discordapp.com/api/guilds/5909587603
 - NStgData (3D Models)
 - NStgeData (3D VFX models)
 - NSeffData (VFX configs)
+- NStuData (Map configs)
 
 **Other files will be added in future updates.**
 
 
 ## Unsupported archives ##
 
-- NStuData (Map configs)
 - NStsData
 - NStkData
 - NSemData

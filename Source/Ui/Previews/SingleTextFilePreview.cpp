@@ -63,6 +63,11 @@ SingleTextFilePreview::~SingleTextFilePreview() {
     delete ui;
 }
 
+void SingleTextFilePreview::setSaveEnabled(bool enabled) {
+    ui->saveButton->setVisible(enabled);
+    ui->plainTextEdit->setReadOnly(!enabled);
+}
+
 void SingleTextFilePreview::onReplaced(const QByteArray &text) {
     usesCrLf = text.contains("\r\n");
     ui->plainTextEdit->clear();
