@@ -141,7 +141,7 @@ The experimental branch and releases flagged **pre-release** are in development 
 
 ## Report bugs and suggest features ##
 
-If you have any **problems** with OnexExplorer or want to suggest new **features** feel free to open **[issues](https://github.com/Pumbaa98/OnexExplorer/issues)**.
+If you have any **problems** with OnexExplorer or want to suggest new **features** feel free to open **[issues](https://github.com/noszanou/OnexExplorer/issues)**.
 Please don't forget to mention the **version** you're using.
 
 
