@@ -4,9 +4,6 @@ OnexExplorer is an open-source tool for unpacking and repacking .NOS data files 
 
 **If you paid for this software, you got scammed. It is free.**
 
-Client Modding Discord:  [<img src="https://discordapp.com/api/guilds/590958760374042657/widget.png?style=shield">](https://discord.gg/t73Ayca)
-
-
 ## What it does ##
 
 ### Explorer ###
